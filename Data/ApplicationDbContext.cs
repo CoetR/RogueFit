@@ -26,6 +26,8 @@ namespace RogueFit.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.SubCategories)
                 .WithOne(sc => sc.Category)
