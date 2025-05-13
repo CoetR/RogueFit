@@ -12,5 +12,9 @@ namespace RogueFit.Models
         [Precision(18, 2)]
         public required Decimal Price { get; set; }
         public required string Image {  get; set; }
+
+        public int TagId { get; set; }
+
+        public Tag Tag { get; set; }
     }
 }
