@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RogueFit.Models;
 
 namespace RogueFit.Data
 {
@@ -17,5 +18,7 @@ namespace RogueFit.Data
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
             options.UseSqlServer(connectionString);
         }
+
+        public DbSet<Product> Products { get; set; }
     }
 }
