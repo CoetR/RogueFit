@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RogueFit.Data;
+using RogueFit.ViewModels;
 
 namespace RogueFit.Controllers
 {
@@ -14,8 +16,15 @@ namespace RogueFit.Controllers
 
         public IActionResult Index()
         {
-            var products = dbContext.Products.ToList();
-            return View(products);
+            var viewModel = new ShopViewModel
+            {
+                Categories = dbContext.Categories.Include(c => c.SubCategories).ToList(),
+                SubCategories = dbContext.SubCategories.Include(sc => sc.Tags).ToList(),
+                Tags = dbContext.Tags.ToList(),
+                Products = dbContext.Products.Include(p => p.Tag).ThenInclude(t => t.SubCategory).ThenInclude(sc => sc.Category).ToList()
+            };
+
+            return View(viewModel);
         }
     }
 }
