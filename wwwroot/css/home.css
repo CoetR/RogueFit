@@ -63,20 +63,31 @@ body {
 }
 
 @media only screen and (min-width: 961px) {
+    header {
+        width: 100%;
+        background-color: white;
+        color: white;
+        padding: 1%;
+        text-align: center;
+    }
+
     #logo {
         width: 50%;
     }
 
+    #nav-container {
+        text-align: center;
+    }
+
     #tab-container {
         text-align: center;
-        display: flex;
     }
 
     #tab-btn {
         background-color: white;
         color: black;
-        width: 15%;
-        padding: 0;
+        width: 10%;
+        padding: 1%;
         margin-block: 1%;
     }
 
