@@ -1,2 +1,207 @@
-﻿body {
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial;
+}
+
+@media only screen and (min-width: 425px) {
+    main {
+        display: grid;
+        grid-template-columns: 30%;
+        grid-template-rows: 10% 1fr auto;
+        grid-template-areas: "sidebar topnav"
+            "sidebar content"
+            "sidebar footer";
+        height: 100%;
+    }
+
+    #section-1-sidebar {
+        grid-area: sidebar;
+        background-color: #07013d;
+        color: white;
+        text-align: center;
+        padding: 5%;
+        width: 100%;
+        height: 100%;
+    }
+
+    #section-2-navbar {
+        grid-area: topnav;
+        text-align: end;
+        width: 100%;
+    }
+
+    #tab-container {
+        text-align: center;
+        display: flex;
+    }
+
+    #tab-btn {
+        background-color: white;
+        color: black;
+        width: 15%;
+        padding: 0;
+        margin-block: 1%;
+    }
+
+    #tab-svg {
+        width: 40%;
+        color: #1c254f;
+    }
+
+    #section-3-productBox {
+        grid-area: cotent;
+        padding: 5%;
+        overflow-y: auto;
+    }
+
+    #product-card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5%;
+    }
+
+    #product-card {
+        background-color: white;
+        color: black;
+        border-radius: 3%;
+        padding: 3%;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 426px) and (max-width: 960px) {
+    main {
+        display: grid;
+        grid-template-columns: 20%;
+        grid-template-rows: 10% 1fr auto;
+        grid-template-areas: "sidebar topnav"
+            "sidebar content"
+            "sidebar footer";
+        height: 100%;
+    }
+
+    #section-1-sidebar {
+        grid-area: sidebar;
+        background-color: #07013d;
+        color: white;
+        text-align: center;
+        padding: 5%;
+        height: 100%;
+    }
+
+    #section-2-navbar {
+        grid-area: topnav;
+        text-align: end;
+        line-height: 50%;
+    }
+
+    #tab-container {
+        text-align: center;
+        display: flex;
+    }
+
+    #tab-btn {
+        background-color: white;
+        color: black;
+        width: 15%;
+        padding: 0;
+        margin-block: 1%;
+    }
+
+    #tab-svg {
+        width: 40%;
+        color: #1c254f;
+    }
+
+    #section-3-productBox {
+        grid-area: cotent;
+        padding: 5%;
+        overflow-y: auto;
+    }
+
+    #product-card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5%;
+    }
+
+    #product-card {
+        background-color: white;
+        color: black;
+        border-radius: 3%;
+        padding: 3%;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 961px) {
+    main {
+        display: grid;
+        grid-template-columns: 30%;
+        grid-template-rows: 10% 1fr auto;
+        grid-template-areas: "sidebar topnav"
+            "sidebar content"
+            "sidebar footer";
+        height: 100%;
+    }
+
+    #section-1-sidebar {
+        grid-area: sidebar;
+        background-color: #07013d;
+        color: white;
+        text-align: center;
+        padding: 5%;
+        width: 100%;
+        height: 100%;
+    }
+
+    #section-2-navbar {
+        grid-area: topnav;
+        text-align: end;
+        width: 100%;
+    }
+
+    #tab-container {
+        text-align: center;
+        display: flex;
+    }
+
+    #tab-btn {
+        background-color: white;
+        color: black;
+        width: 15%;
+        padding: 0;
+        margin-block: 1%;
+    }
+
+    #tab-svg {
+        width: 40%;
+        color: #1c254f;
+    }
+
+    #section-3-productBox {
+        grid-area: cotent;
+        padding: 5%;
+        overflow-y: auto;
+    }
+
+    #product-card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5%;
+    }
+
+    #product-card {
+        background-color: white;
+        color: black;
+        border-radius: 3%;
+        padding: 3%;
+        text-align: center;
+    }
 }

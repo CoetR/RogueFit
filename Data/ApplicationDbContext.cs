@@ -6,17 +6,10 @@ namespace RogueFit.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        private readonly IConfiguration _configuration;
-
-        public ApplicationDbContext(IConfiguration configuration)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+            :base(options) 
         {
-            _configuration = configuration;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            var connectionString = _configuration.GetConnectionString("DefaultConnection");
-            options.UseSqlServer(connectionString);
+            
         }
 
         public DbSet<Product> Products { get; set; }
