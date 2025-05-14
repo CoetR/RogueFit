@@ -46,68 +46,30 @@ namespace RogueFit.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductCreateViewModel vm)
         {
-            vm.Categories = await dbContext.Categories
-                .Select(c => new SelectListItem(c.Name, c.Id.ToString()))
-                .ToListAsync();
-
-            if (vm.SelectedCategoryId.HasValue)
-            {
-                vm.SubCategories = await dbContext.SubCategories
-                    .Where(sc => sc.CategoryId == vm.SelectedCategoryId.Value)
-                    .Select(sc => new SelectListItem(sc.Name, sc.Id.ToString()))
-                    .ToListAsync();
-            }
-
-            if (vm.SelectedSubCategoryId.HasValue)
-            {
-                vm.Tags = await dbContext.Tags
-                    .Where(t => t.SubCategoryId == vm.SelectedSubCategoryId.Value)
-                    .Select(t => new SelectListItem(t.Name, t.Id.ToString()))
-                    .ToListAsync();
-            }
-
             if (!ModelState.IsValid)
             {
+                await PopulateCategories(vm);
                 return View(vm);
             }
 
-            int categoryId;
-            if (vm.SelectedCategoryId.HasValue)
+            if (!vm.SelectedCategoryId.HasValue)
             {
-                categoryId = vm.SelectedCategoryId.Value;
-            }
-            else if (!string.IsNullOrWhiteSpace(vm.NewCategoryName))
-            {
-                var cat = new Category { Name = vm.NewCategoryName.Trim() };
-                dbContext.Categories.Add(cat);
-                await dbContext.SaveChangesAsync();
-                categoryId = cat.Id;
-            }
-            else
-            {
-                ModelState.AddModelError(nameof(vm.SelectedCategoryId), "Please select or enter a Category");
+                ModelState.AddModelError(nameof(vm.SelectedCategoryId), "Please select a Category");
+                await PopulateCategories(vm);
                 return View(vm);
             }
 
-            int subCategoryId = -1;
+            int categoryId = vm.SelectedCategoryId.Value;
+
+            int subCategoryId;
             if (vm.SelectedSubCategoryId.HasValue)
             {
                 subCategoryId = vm.SelectedSubCategoryId.Value;
             }
-            else if (!string.IsNullOrWhiteSpace(vm.NewSubCategoryName))
-            {
-                var subCat = new SubCategory 
-                { 
-                    Name = vm.NewSubCategoryName.Trim(),
-                    CategoryId = categoryId
-                };
-                dbContext.SubCategories.Add(subCat);
-                await dbContext.SaveChangesAsync();
-                categoryId = subCat.Id;
-            }
             else
             {
-                ModelState.AddModelError(nameof(vm.SelectedCategoryId), "Please select or enter a Sub Category");
+                ModelState.AddModelError(nameof(vm.SelectedSubCategoryId), "Please select a Sub Category");
+                await PopulateCategories(vm);
                 return View(vm);
             }
 
@@ -116,20 +78,10 @@ namespace RogueFit.Controllers
             {
                 tagId = vm.SelectedTagId.Value;
             }
-            else if (!string.IsNullOrWhiteSpace(vm.NewTagName))
-            {
-                var tag = new Tag 
-                { 
-                    Name = vm.NewTagName.Trim(),
-                    SubCategoryId = subCategoryId
-                };
-                dbContext.Tags.Add(tag);
-                await dbContext.SaveChangesAsync();
-                tagId = tag.Id;
-            }
             else
             {
-                ModelState.AddModelError(nameof(vm.SelectedTagId), "Please select or enter a Tag");
+                ModelState.AddModelError(nameof(vm.SelectedTagId), "Please select Tag");
+                await PopulateCategories(vm);
                 return View(vm);
             }
 
@@ -159,7 +111,22 @@ namespace RogueFit.Controllers
 
             return RedirectToAction("Index");
 
+        }
 
+        private async Task PopulateCategories(ProductCreateViewModel vm)
+        {
+            vm.Categories = await dbContext.Categories
+                .Select(c => new SelectListItem(c.Name, c.Id.ToString()))
+                .ToListAsync();
+
+            vm.SubCategories = await dbContext.SubCategories
+                .Where(sc => sc.CategoryId == vm.SelectedCategoryId)
+                .Select(sc => new SelectListItem(sc.Name, sc.Id.ToString()))
+                .ToListAsync();
+
+            vm.Tags = await dbContext.Tags
+                .Select(t => new SelectListItem(t.Name, t.Id.ToString()))
+                .ToListAsync();
         }
     }
 }
