@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body, html {
+html, body {
     height: 100%;
     font-family: Arial;
 }
@@ -143,12 +143,12 @@ body, html {
 @media only screen and (min-width: 961px) {
     main {
         display: grid;
-        grid-template-columns: 30%;
+        grid-template-columns: 20% 100%;
         grid-template-rows: 10% 1fr auto;
         grid-template-areas: "sidebar topnav"
             "sidebar content"
             "sidebar footer";
-        height: 100%;
+        height: 100vh;
     }
 
     #section-1-sidebar {
@@ -157,7 +157,6 @@ body, html {
         color: white;
         text-align: center;
         padding: 5%;
-        width: 100%;
         height: 100%;
     }
 
@@ -168,21 +167,21 @@ body, html {
     }
 
     #tab-container {
-        text-align: center;
-        display: flex;
     }
 
     #tab-btn {
+        display: flex;
+        align-items: center;
         background-color: white;
         color: black;
         width: 15%;
-        padding: 0;
+        padding: 1%;
         margin-block: 1%;
     }
 
     #tab-svg {
-        width: 40%;
-        color: #1c254f;
+        width: 15%;
+        color: #07013d;
     }
 
     #section-3-productBox {
