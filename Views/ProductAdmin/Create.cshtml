@@ -1,0 +1,70 @@
+﻿@using RogueFit.ViewModels
+@model ProductCreateViewModel
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/" />
+    <title>Product Create</title>
+</head>
+<body>
+    <header>
+        <h4>Create new Product</h4>
+    </header>
+    <main>
+        <div class="container" id="form-container">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div>
+                    <label asp-for="Name" id="form-label"></label>
+                    <input asp-for="Name" class="form-control" id="form-input" />
+                    <span asp-validation-for="Name" class="text-danger" id="form-span"></span>
+                </div>
+                <div>
+                    <label asp-for="Description" id="form-label"></label>
+                    <input asp-for="Description" class="form-control" id="form-input" />
+                    <span asp-validation-for="Description" class="text-danger" id="form-span"></span>
+                </div>
+                <div>
+                    <label asp-for="Price" id="form-label"></label>
+                    <input asp-for="Price" class="form-control" id="form-input" />
+                    <span asp-validation-for="Price" class="text-danger" id="form-span"></span>
+                </div>
+                <div>
+                    <label>Image</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" id="form-img-upload" />
+                    <span asp-validation-for="ImageFile" class="text-danger" id="form-span"></span>
+                </div>
+                <div>
+                    <label>Category</label>
+                    <select asp-for="SelectedCategoryId" asp-items="Model.Categories" class="form-control" id="form-select">
+                        <option value="">-- Select Category --</option>
+                    </select>
+                    <input asp-for="NewCategoryName" class="form-control mt-2" placeholder="Or add new Category" />
+                </div>
+                <div>
+                    <label>Sub Categories</label>
+                    <select asp-for="SelectedSubCategoryId" class="form-control">
+                        <option value="">-- Select Sub Category</option>
+                    </select>
+                    <input asp-for="NewSubCategoryName" class="form-control mt-2" placeholder="Or add new Sub Category" />
+                </div>
+                <div>
+                    <label>Tag</label>
+                    <select asp-for="SelectedTagId" class="form-control">
+                        <option value="">-- Select Tag</option>
+                    </select>
+                    <input asp-for="NewTagName" class="form-control mt-2" placeholder="Or add new Tag" />
+                </div>
+                <button type="submit" class="btn btn-primary mt-3" id="submit-btn" >Create Product</button> 
+            </form>
+        </div>
+    </main>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
