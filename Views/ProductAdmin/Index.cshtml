@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Product>
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/productManagement.css" />
+    <title>Product Admin Page</title>
+</head>
+<body>
+    <header>
+        <h4>Manage Products</h4>
+    </header>
+    <main>
+        <a asp-controller="ProductAdmin" asp-action="Create" class="btn" id="create-btn">Create New Product</a>
+
+        <table class="table table-striped" id="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Tag</th>
+                    <th>Sub Category</th>
+                    <th>Category</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>@item.Description</td>
+                        <td>@item.Tag?.Name</td>
+                        <td>@item.Tag?.SubCategory?.Name</td>
+                        <td>@item.Tag?.SubCategory?.Category?.Name</td>
+                        <td>@item.Image</td>
+                        <td>
+                            <a asp-controller="ProductAdmin" asp-action="Edit" asp-route-id="@item.Id" class="btn" id="tb-actions-btn">Edit</a>
+                            <a asp-controller="ProductAdmin" asp-action="Delete" asp-route-id="@item.Id" class="btn" id="tb-actions-btn">Delete</a>
+                        </td>
+                    </tr>
+                    
+                
+                }
+            </tbody>
+        </table>
+    </main>
+    <footer></footer>
+</body>
+</html>
