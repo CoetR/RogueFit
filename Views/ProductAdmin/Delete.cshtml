@@ -1,0 +1,30 @@
+﻿@model Product
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/productDelete.css" />
+    <title>Product Delete</title>
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <h4>Delete Product</h4>
+        <p>Are you sure you want to Delete this product?</p>
+        <div>
+            <strong>@Model.Name</strong>
+            <strong>@Model.Description</strong>
+            <strong>@Model.Price</strong>
+        </div>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id"/>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>
