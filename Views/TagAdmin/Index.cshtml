@@ -1,1 +1,42 @@
-﻿
+﻿@model IEnumerable<Tag>
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/tagIndex.css" />
+    <title>Tag Index</title>
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <h4>Tags</h4>
+        <a asp-action="Create" class="btn btn-primary mb-3">Create New Tag</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>SubCategory</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.SubCategory?.Name</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+    <footer></footer>
+</body>
+</html>
