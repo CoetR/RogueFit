@@ -1,25 +1,24 @@
-﻿@model SubCategory
+﻿@model Tag
 
 <!DOCTYPE html>
 <html lang="eng">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/subcategoryDelete.css" />
-    <title>SubCategory Delete</title>
+    <link rel="stylesheet" href="~/css/tagDelete.css" />
+    <title>Tag Delete</title>
 </head>
 <body>
     <main>
-        <h4>Delete SubCategory</h4>
-        <p>Are you sure you want to Delete this SubCategory</p>
+        <h4>Delete Tag</h4>
+        <p>Are you sure you wat to Delete this Tag</p>
         <div>
             <strong>@Model.Name</strong>
         </div>
-
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
             <button type="submit" class="btn btn-danger">Delete</button>
-            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            <a asp-action="Index" class="btn btn-seconday">Cancel</a>
         </form>
     </main>
     <footer></footer>
