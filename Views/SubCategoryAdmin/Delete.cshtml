@@ -1,0 +1,28 @@
+﻿@using RogueFit.ViewModels
+@model SubCategoryViewModel
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/subcategoryDelete.css" />
+    <title>SubCategory Delete</title>
+</head>
+<body>
+    <main>
+        <h4>Delete SubCategory</h4>
+        <p>Are you sure you want to Delete this SubCategory</p>
+        <div>
+            <strong>@Model.Name</strong>
+        </div>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="SelectedCategoryId" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>
