@@ -1,0 +1,27 @@
+﻿@model Category
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/categoryDelete.css" />
+    <title>Category Delete</title>
+</head>
+<body>
+    <main>
+        <h4>Delete a Category</h4>
+        <p>Are you sure you want to Delete this Category</p>
+        <div>
+            <strong>@Model.Name</strong>
+        </div>
+        <form asp-action="Delete" >
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
