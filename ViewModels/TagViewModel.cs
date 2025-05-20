@@ -10,6 +10,6 @@ namespace RogueFit.ViewModels
         [Required]
         public int SelectedSubCategoryId { get; set; }
 
-        public IEnumerable<SelectListItem> SubCategories { get; set; }
+        public List<SelectListItem> SubCategories { get; set; } = new();
     }
 }

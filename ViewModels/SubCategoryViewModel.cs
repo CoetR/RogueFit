@@ -10,6 +10,7 @@ namespace RogueFit.ViewModels
         [Required]
         public int SelectedCategoryId { get; set; }
 
-        public IEnumerable<SelectListItem> Categories { get; set; }
+        public List<SelectListItem> Categories { get; set; } = new();
+
     }
 }

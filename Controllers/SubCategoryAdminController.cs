@@ -40,13 +40,14 @@ namespace RogueFit.Controllers
             if (!ModelState.IsValid)
             {
                 vm.Categories = await dbContext.Categories
-                    .Select(c => new SelectListItem(c.Name, c.Id.ToString())).ToListAsync();
+                    .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() })
+                    .ToListAsync();
                 return View(vm);
             }
 
             var subCategory = new SubCategory
             {
-                Name = vm.Name,
+                Name = vm.Name.Trim(),
                 CategoryId = vm.SelectedCategoryId
             };
 

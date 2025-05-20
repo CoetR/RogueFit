@@ -32,7 +32,7 @@
                     <span asp-validation-for="Price" class="text-danger" id="form-span"></span>
                 </div>
                 <div>
-                    <label>Image</label>
+                    <label asp-for="ImageFile"></label>
                     <input asp-for="ImageFile" type="file" class="form-control" id="form-img-upload" />
                     <span asp-validation-for="ImageFile" class="text-danger" id="form-span"></span>
                 </div>
@@ -44,13 +44,13 @@
                 </div>
                 <div>
                     <label>Sub Categories</label>
-                    <select asp-for="SelectedSubCategoryId" class="form-control">
+                    <select asp-for="SelectedSubCategoryId" asp-items="Model.SubCategories" class="form-control" id="form-select">
                         <option value="">-- Select Sub Category</option>
                     </select>
                 </div>
                 <div>
                     <label>Tag</label>
-                    <select asp-for="SelectedTagId" class="form-control">
+                    <select asp-for="SelectedTagId" asp-items="Model.Tags" class="form-control" id="form-select">
                         <option value="">-- Select Tag</option>
                     </select>
                 </div>
