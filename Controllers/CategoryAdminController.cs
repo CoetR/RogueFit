@@ -30,11 +30,12 @@ namespace RogueFit.Controllers
         public async Task<IActionResult> Create(Category category)
         {
             if (!ModelState.IsValid)
-                return View (category);
-
-            dbContext.Categories.Add(category);
-            await dbContext.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            {
+                dbContext.Categories.Add(category);
+                await dbContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
         }
 
         public async Task<IActionResult> Edit(int id)
