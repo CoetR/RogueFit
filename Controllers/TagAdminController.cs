@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RogueFit.Data;
 using RogueFit.Models;
+using RogueFit.ViewModels;
 
 namespace RogueFit.Controllers
 {
@@ -21,69 +22,87 @@ namespace RogueFit.Controllers
             return View(tags);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.SubCategories = new SelectList(await dbContext.SubCategories.Include(sc => sc.Category).ToListAsync(), "Id", "Name");
-            return View();
+            var vm = new TagViewModel
+            {
+                SubCategories = await dbContext.SubCategories
+                    .Select(sc => new SelectListItem(sc.Name, sc.Id.ToString())).ToListAsync()
+            };
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Tag tag)
+        public async Task<IActionResult> Create(TagViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.SubCategories = new SelectList(await dbContext.SubCategories.Include(sc => sc.Category).ToListAsync(), "Id", "Name");
-                return View(tag);
+                vm.SubCategories = await dbContext.SubCategories
+                    .Select(sc => new SelectListItem(sc.Name, sc.Id.ToString())).ToListAsync();
+                return View(vm);
             }
+
+            var tag = new Tag
+            {
+                Name = vm.Name,
+                SubCategoryId = vm.SelectedSubCategoryId
+            };
 
             dbContext.Tags.Add(tag);
             await dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var tag = await dbContext.Tags.FindAsync(id);
             if (tag == null) return NotFound();
 
-            ViewBag.SubCategories = new SelectList(await dbContext.SubCategories.Include(sc => sc.Category).ToListAsync(), "Id", "Name");
-            return View(tag);
+            var vm = new TagViewModel
+            {
+                Name = tag.Name,
+                SelectedSubCategoryId = tag.SubCategoryId,
+                SubCategories = await dbContext.SubCategories
+                    .Select(sc => new SelectListItem(sc.Name, sc.Id.ToString())).ToListAsync()
+            };
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Tag tag)
+        public async Task<IActionResult> Edit(int id, TagViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.SubCategories = new SelectList(await dbContext.SubCategories.Include(sc => sc.Category).ToListAsync(), "Id", "Name");
-                return View(tag);
+                vm.SubCategories = await dbContext.SubCategories
+                    .Select(sc => new SelectListItem(sc.Name, sc.Id.ToString())).ToListAsync();
             }
+
+            var tag = await dbContext.Tags.FindAsync(id);
+            if (tag == null) return NotFound();
+
+            tag.Name = vm.Name;
+            tag.SubCategoryId = vm.SelectedSubCategoryId;
 
             dbContext.Tags.Update(tag);
             await dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var tag = await dbContext.Tags.Include(t => t.SubCategory).FirstOrDefaultAsync(t => t.Id == id);
-            if (tag == null) return NotFound();
-            return View(tag);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
             var tag = await dbContext.Tags.FindAsync(id);
-            if (tag != null)
-            {
-                dbContext.Tags.Remove(tag);
-                await dbContext.SaveChangesAsync();
-            }
+            if (tag == null) return NotFound();
+
+            dbContext.Tags.Remove(tag);
+            await dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

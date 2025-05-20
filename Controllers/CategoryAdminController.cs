@@ -20,13 +20,17 @@ namespace RogueFit.Controllers
             return View(categories);
         }
 
-        public IActionResult Create() => View();
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category category)
         {
-            if (!ModelState.IsValid) return View (category);
+            if (!ModelState.IsValid)
+                return View (category);
 
             dbContext.Categories.Add(category);
             await dbContext.SaveChangesAsync();
@@ -44,7 +48,8 @@ namespace RogueFit.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Category category)
         {
-            if (!ModelState.IsValid) return View(category);
+            if (!ModelState.IsValid) 
+                return View(category);
 
             dbContext.Categories.Update(category);
             await dbContext.SaveChangesAsync();
