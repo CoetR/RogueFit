@@ -1,0 +1,25 @@
+﻿@model Category
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/categoryEdit.css" />
+    <title>Category Edit</title>
+</head>
+<body>
+    <main>
+        <h4>Edit a Category</h4>
+        <form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Edit</button>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>
