@@ -11,7 +11,14 @@
 <body>
     <main>
         <h4>Create a Category</h4>
-        
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Create</button>
+        </form>
     </main>
     <footer></footer>
 </body>
