@@ -6,12 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/" />
+    <link rel="stylesheet" href="~/css/productCreate.css" />
     <title>Product Create</title>
 </head>
 <body>
     <header>
-        <h4>Create new Product</h4>
+        <h4>Create New Product</h4>
     </header>
     <main>
         <div class="container" id="form-container">
@@ -41,21 +41,18 @@
                     <select asp-for="SelectedCategoryId" asp-items="Model.Categories" class="form-control" id="form-select">
                         <option value="">-- Select Category --</option>
                     </select>
-                    <input asp-for="NewCategoryName" class="form-control mt-2" placeholder="Or add new Category" />
                 </div>
                 <div>
                     <label>Sub Categories</label>
                     <select asp-for="SelectedSubCategoryId" class="form-control">
                         <option value="">-- Select Sub Category</option>
                     </select>
-                    <input asp-for="NewSubCategoryName" class="form-control mt-2" placeholder="Or add new Sub Category" />
                 </div>
                 <div>
                     <label>Tag</label>
                     <select asp-for="SelectedTagId" class="form-control">
                         <option value="">-- Select Tag</option>
                     </select>
-                    <input asp-for="NewTagName" class="form-control mt-2" placeholder="Or add new Tag" />
                 </div>
                 <button type="submit" class="btn btn-primary mt-3" id="submit-btn" >Create Product</button> 
             </form>
