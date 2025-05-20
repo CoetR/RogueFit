@@ -1,0 +1,51 @@
+﻿@using RogueFit.ViewModels
+@model ProductCreateViewModel
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/productEdit.css" />
+    <title>Product Edit</title>
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <h4>Edit Product</h4>
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" ></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedCategoryId"></label>
+                <select asp-for="SelectedCategoryId" class="form-control" asp-items="Model.Categories"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedSubCategoryId"></label>
+                <select asp-for="SelectedSubCategoryId" class="form-control" asp-items="Model.SubCategories"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedTagId"></label>
+                <select asp-for="SelectedTagId" class="form-control" asp-items="Model.Tags"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile"></label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>
