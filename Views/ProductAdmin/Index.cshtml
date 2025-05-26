@@ -38,14 +38,12 @@
                         <td>@item.Tag?.Name</td>
                         <td>@item.Tag?.SubCategory?.Name</td>
                         <td>@item.Tag?.SubCategory?.Category?.Name</td>
-                        <td>@item.Image</td>
+                        <td><img src="~/images/@item.Image" width="50"/></td>
                         <td>
                             <a asp-controller="ProductAdmin" asp-action="Edit" asp-route-id="@item.Id" class="btn" id="tb-actions-btn">Edit</a>
                             <a asp-controller="ProductAdmin" asp-action="Delete" asp-route-id="@item.Id" class="btn" id="tb-actions-btn">Delete</a>
                         </td>
                     </tr>
-                    
-                
                 }
             </tbody>
         </table>
